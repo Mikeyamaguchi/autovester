@@ -1,7 +1,7 @@
 script_name("Autovest")
-script_version("1.9")
+script_version("2.0")
 script_author("Mike")
-local script_version = 1.9
+local script_version = 2.0
 --original_author("akacross")
 require("moonloader")
 require("sampfuncs")
@@ -30,11 +30,9 @@ local autovest = {
     autovestcmd = "autovest",
     autoacceptercmd = "av",
     ddmodecmd = "ddmode",
-    vestmodecmd = "vestmode",
     timer = 12,
     ddmode = false,
     enablebydefault = true,
-    vestmode = 0,
 }
 
 function main()
@@ -70,7 +68,7 @@ function main()
 		update_script(false, false)
 	end
 	autovest.timer = autovest.ddmode and 7 or 12
-	sampAddChatMessage("[Autovest]{ffff00} vestmode is currently set to "..vestmodename(autovest.vestmode)..".", 1999280)
+	sampAddChatMessage("[Autovest]{ffff00} Sucessfully Loaded!", 1999280)
 	sampRegisterChatCommand(autovest.autovestcmd, function()
 		_enabled = not _enabled
 		sampAddChatMessage(string.format("[Autovest]{ffff00} Automatic vest %s.", _enabled and 'enabled' or 'disabled'), 1999280)
@@ -83,23 +81,6 @@ function main()
 		autovest.ddmode = not autovest.ddmode
 		sampAddChatMessage(string.format("[Autovest]{ffff00} ddmode is now %s.", autovest.ddmode and 'enabled' or 'disabled'), 1999280)
 		autovest.timer = autovest.ddmode and 7 or 12
-	end)
-	sampRegisterChatCommand(autovest.vestmodecmd, function(params)
-		if string.len(params) > 0 then
-			if params == 'families' then
-				autovest.vestmode = 0
-				sampAddChatMessage("[Autovest]{ffff00} vestmode is now set to families.", 1999280)
-			elseif params == 'everyone' then
-				autovest.vestmode = 2
-				sampAddChatMessage("[Autovest]{ffff00} vestmode is now set to everyone.", 1999280)
-			else
-				sampAddChatMessage("[Autovest]{ffff00} vestmode is currently set to "..vestmodename(autovest.vestmode)..".", 1999280)
-				sampAddChatMessage('USAGE: /'..autovest.vestmodecmd..' [families/everyone]', -1)
-			end
-		else
-			sampAddChatMessage("[Autovest]{ffff00} vestmode is currently set to "..vestmodename(autovest.vestmode)..".", 1999280)
-			sampAddChatMessage('USAGE: /'..autovest.vestmodecmd..' [families/everyone]', -1)
-		end
 	end)
 	autovest.timer = autovest.ddmode and 7 or 12
     if autovest.ddmode then
@@ -130,26 +111,21 @@ function main()
 								if pAnimId ~= 1158 and pAnimId ~= 1159 and pAnimId ~= 1160 and pAnimId ~= 1161 and pAnimId ~= 1162
 								and pAnimId ~= 1163 and pAnimId ~= 1164 and pAnimId ~= 1165 and pAnimId ~= 1166 and pAnimId ~= 1167
 								and pAnimId ~= 1069 and pAnimId ~= 1070 and pAnimId2 ~= 746 and not aim then
-									if autovest.vestmode == 0 then
-										if has_number(skins, getCharModel(ped)) then
-											sendGuard(PlayerID)
-										end
-										if autovest.vestmode == 2 then
-											sendGuard(PlayerID)
-										end
-										if autoaccepter and autoacceptertoggle then
-											local _, playerped = storeClosestEntities(ped)
-											local result, PlayerID = sampGetPlayerIdByCharHandle(playerped)
-											if result and playerped ~= ped then
-												if getCharArmour(ped) < 49 and sampGetPlayerAnimationId(ped) ~= 746 then
-													autoaccepternickname = sampGetPlayerNickname(PlayerID)
-													local playerx, playery, playerz = getCharCoordinates(ped)
-													local pedx, pedy, pedz = getCharCoordinates(playerped)
-													if getDistanceBetweenCoords3d(playerx, playery, playerz, pedx, pedy, pedz) < 4 then
-														if autoaccepternickname == autoaccepternick then
-															sampSendChat("/accept bodyguard")
-															autoacceptertoggle = false
-														end
+									if has_number(skins, getCharModel(ped)) then
+										sendGuard(PlayerID)
+									end
+									if autoaccepter and autoacceptertoggle then
+										local _, playerped = storeClosestEntities(ped)
+										local result, PlayerID = sampGetPlayerIdByCharHandle(playerped)
+										if result and playerped ~= ped then
+											if getCharArmour(ped) < 49 and sampGetPlayerAnimationId(ped) ~= 746 then
+												autoaccepternickname = sampGetPlayerNickname(PlayerID)
+												local playerx, playery, playerz = getCharCoordinates(ped)
+												local pedx, pedy, pedz = getCharCoordinates(playerped)
+												if getDistanceBetweenCoords3d(playerx, playery, playerz, pedx, pedy, pedz) < 4 then
+													if autoaccepternickname == autoaccepternick then
+														sampSendChat("/accept bodyguard")
+														autoacceptertoggle = false
 													end
 												end
 											end
@@ -366,14 +342,6 @@ function has_number(tab, val)
         end
     end
     return false
-end
-
-function vestmodename(vestmode)
-	if vestmode == 0 then
-		return 'families'
-	elseif vestmode == 2 then
-		return 'Everyone'
-	end
 end
 
 sampevHandler()
