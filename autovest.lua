@@ -13,6 +13,7 @@ local json = require("dkjson")
 local path = getWorkingDirectory() .. '\\config\\' 
 local cfg = path .. thisScript().name .. '.json'
 local script_path = thisScript().path
+local skinsurl = "https://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/skins.json"
 local script_url = "https://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/autovest.lua"
 local _last_vest = 0
 local _enabled = true
@@ -34,7 +35,6 @@ local autovest = {
     ddmode = false,
     enablebydefault = true,
     vestmode = 0,
-    skinsurl = "https://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/skins.json",
 }
 
 function main()
@@ -126,7 +126,7 @@ function main()
 						local playerX, playerY, playerZ = getCharCoordinates(playerped)
 						local dist = getDistanceBetweenCoords3d(myX, myY, myZ, playerX, playerY, playerZ)
 						if (autovest.ddmode and tostring(dist) or dist) < (autovest.ddmode and tostring(0.9) or 6) then
-							if sampGetPlayerArmor(PlayerID) < 48 then
+							if sampGetPlayerArmor(PlayerID) < 49 then
 								local pAnimId = sampGetPlayerAnimationId(select(2, sampGetPlayerIdByCharHandle(ped)))
 								local pAnimId2 = sampGetPlayerAnimationId(playerid)
 								local aim, _ = getCharPlayerIsTargeting(h)
@@ -225,7 +225,7 @@ function sampevHandler()
 end
 
 function loadskinids()
-    asyncHttpRequest('GET', autovest.skinsurl, nil,
+    asyncHttpRequest('GET', skinsurl, nil,
     function(response)
         if response.text ~= nil then
             local success, jsonData = pcall(json.decode, response.text)
@@ -249,7 +249,7 @@ function update_script(noupdatecheck, noerrorcheck)
     asyncHttpRequest('GET', script_url, nil,
         function(response)
             if response.text then
-                local update_version = response.text:match("script_version = (%d+%.?%d*)")
+                local update_version = response.text:match("script_version = (.+)")
                 if update_version then
                     update_version = tonumber(update_version)
                     if update_version > script_version then
