@@ -367,7 +367,7 @@ end
 
 function vestmodename(vestmode)
 	if vestmode == 0 then
-		return 'allies'
+		return 'families'
 	elseif vestmode == 2 then
 		return 'Everyone'
 	end
