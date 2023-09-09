@@ -1,6 +1,6 @@
 script_name("Autovest")
 script_version("1.9")
-script_Reconfigurator("Mike")
+script_author("Mike")
 local script_version = 1.9
 --original_author("akacross")
 require("moonloader")
