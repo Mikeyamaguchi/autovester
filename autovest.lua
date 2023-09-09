@@ -113,9 +113,6 @@ function main()
 		wait(0)
 		local _, aduty = getSampfuncsGlobalVar("aduty")
 		local _, HideMe = getSampfuncsGlobalVar("HideMe_check")
-		if wasKeyPressed(0x39) then
-			update_script(true, true)
-		end
 		if _enabled and autovest.timer <= localClock() - _last_vest and not specstate and HideMe == 0 and aduty == 0 then
 			if _you_are_not_bodyguard then
 				autovest.timer = autovest.ddmode and 7 or 12
