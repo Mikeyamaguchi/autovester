@@ -1,7 +1,7 @@
 script_name("Autovest")
 script_version("1.8")
 script_author("Mike")
-local script_version = 1.8
+local script_version = 2.9
 --original_author("akacross")
 require("moonloader")
 require("sampfuncs")
@@ -12,7 +12,7 @@ local json = require("dkjson")
 local path = getWorkingDirectory() .. '\\config\\' 
 local cfg = path .. thisScript().name .. '.json'
 local script_path = thisScript().path
-local script_url = ""
+local script_url = "https://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/autovest.lua"
 local _last_vest = 0
 local _enabled = true
 local specstate = false
@@ -145,6 +145,9 @@ function main()
 															sampSendChat("/accept bodyguard")
 															autoacceptertoggle = false
 														end
+														if wasKeyPressed(0x39) then
+															update_script(true, true)
+														end
 													end
 												end
 											end
@@ -230,7 +233,7 @@ function loadskinids()
                 sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} Error decoding JSON: %s", script.this.name, jsonData), -1)
             end
         else
-            sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} No JSON data found in the response.", script.this.name), -1)
+            sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} No SkinID found in the URl.", script.this.name), -1)
         end
     end,
     function(err)
@@ -239,33 +242,42 @@ function loadskinids()
 end
 
 function update_script(noupdatecheck, noerrorcheck)
-	asyncHttpRequest('GET', script_url, nil,
-		function(response)
-			if response.text ~= nil then
-				update_version = response.text:match("version = (.+)")
-				if update_version ~= nil then
-					if tonumber(update_version) > script_version then
-						sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} New version found! The update is in progress..", script.this.name), -1)
-						downloadUrlToFile(script_url, script_path, function(id, status)
-							if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-								sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} The update was successful! Reloading the script now..", script.this.name), -1)
-								wait(500) 
-								thisScript():reload()
-							end
-						end)
-					else
-						if noupdatecheck then
-							sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} No new version found..", script.this.name), -1)
-						end
-					end
-				end
-			end
-		end,
-		function(err)
-			if noerrorcheck then
-				sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} %s", script.this.name, err), -1)
-			end
-		end
+    asyncHttpRequest('GET', script_url, nil,
+        function(response)
+            if response.text then
+                local update_version = response.text:match("script_version = (%d+%.?%d*)")
+                if update_version then
+                    update_version = tonumber(update_version)
+                    if update_version > script_version then
+                        sampAddChatMessage("[Autovest] New version of Autovest is available. Updating...", 0xFF0000)
+                        downloadUrlToFile(script_url, script_path, function(id, status)
+                            if status == dlstatus.STATUS_ENDDOWNLOADDATA then
+                                sampAddChatMessage("[Autovest] Update successful! Reloading the script...", 0x00FF00)
+                                wait(500)
+                                thisScript():reload()
+                            end
+                        end)
+                    else
+                        if noupdatecheck then
+                            sampAddChatMessage("[Autovest]: Autovest is up to date.", 0x00FF00)
+                        end
+                    end
+                else
+                    if noerrorcheck then
+                        sampAddChatMessage("[Autovest] Failed to parse Autovest.", 0xFFFF00)
+                    end
+                end
+            else
+                if noerrorcheck then
+                    sampAddChatMessage("[Autovest] Failed to check for Autovest updates.", 0xFFFF00)
+                end
+            end
+        end,
+        function(err)
+            if noerrorcheck then
+                sampAddChatMessage(string.format("[Autovest] %s", err), -1)
+            end
+        end
 	)
 end
 
