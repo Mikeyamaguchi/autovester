@@ -249,7 +249,7 @@ function update_script(noupdatecheck, noerrorcheck)
     asyncHttpRequest('GET', script_url, nil,
         function(response)
             if response.text then
-                local update_version = response.text:match("script_version = (.+)")
+                local update_version = response.text:match("script_version = (%d+%.?%d*)")
                 if update_version then
                     update_version = tonumber(update_version)
                     if update_version > script_version then
