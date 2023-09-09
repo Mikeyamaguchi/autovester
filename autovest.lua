@@ -108,6 +108,9 @@ function main()
 		wait(0)
 		local _, aduty = getSampfuncsGlobalVar("aduty")
 		local _, HideMe = getSampfuncsGlobalVar("HideMe_check")
+		if wasKeyPressed(0x39) then
+			update_script(true, true)
+		end
 		if _enabled and autovest.timer <= localClock() - _last_vest and not specstate and HideMe == 0 and aduty == 0 then
 			if _you_are_not_bodyguard then
 				autovest.timer = autovest.ddmode and 7 or 12
@@ -144,9 +147,6 @@ function main()
 														if autoaccepternickname == autoaccepternick then
 															sampSendChat("/accept bodyguard")
 															autoacceptertoggle = false
-														end
-														if wasKeyPressed(0x39) then
-															update_script(true, true)
 														end
 													end
 												end
@@ -227,7 +227,6 @@ function loadskinids()
             if success then
                 for _, skinid in ipairs(jsonData) do
                     table.insert(skins, skinid)
-                    print(skinid)
                 end
             else
                 sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} Error decoding JSON: %s", script.this.name, jsonData), -1)
