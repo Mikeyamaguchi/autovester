@@ -81,19 +81,19 @@ function main()
 	end)
 	sampRegisterChatCommand(autovest.vestmodecmd, function(params)
 		if string.len(params) > 0 then
-			if params == 'allies' then
+			if params == 'families' then
 				autovest.vestmode = 0
-				sampAddChatMessage("[Autovest]{ffff00} vestmode is now set to allies.", 1999280)
+				sampAddChatMessage("[Autovest]{ffff00} vestmode is now set to families.", 1999280)
 			elseif params == 'everyone' then
 				autovest.vestmode = 2
 				sampAddChatMessage("[Autovest]{ffff00} vestmode is now set to everyone.", 1999280)
 			else
 				sampAddChatMessage("[Autovest]{ffff00} vestmode is currently set to "..vestmodename(autovest.vestmode)..".", 1999280)
-				sampAddChatMessage('USAGE: /'..autovest.vestmodecmd..' [allies/everyone]', -1)
+				sampAddChatMessage('USAGE: /'..autovest.vestmodecmd..' [families/everyone]', -1)
 			end
 		else
 			sampAddChatMessage("[Autovest]{ffff00} vestmode is currently set to "..vestmodename(autovest.vestmode)..".", 1999280)
-			sampAddChatMessage('USAGE: /'..autovest.vestmodecmd..' [allies/everyone]', -1)
+			sampAddChatMessage('USAGE: /'..autovest.vestmodecmd..' [families/everyone]', -1)
 		end
 	end)
 	autovest.timer = autovest.ddmode and 7 or 12
