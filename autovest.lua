@@ -7,6 +7,7 @@ require("moonloader")
 require("sampfuncs")
 require('extensions-lite')
 local sampev = require('lib.samp.events')
+local dlstatus = require('moonloader').download_status
 local effil = require("effil")
 local json = require("dkjson")
 local path = getWorkingDirectory() .. '\\config\\' 
