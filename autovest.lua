@@ -1,7 +1,7 @@
 script_name("Autovest")
-script_version("3.1")
+script_version("2.0")
 script_author("Mike")
-local script_version = 3.1
+local script_version = 2.0
 --original_author("akacross")
 require("moonloader")
 require("sampfuncs")
@@ -68,18 +68,18 @@ function main()
 		update_script(false, false)
 	end
 	autovest.timer = autovest.ddmode and 7 or 12
-	sampAddChatMessage("[Autovest]{ffff00} Sucessfully Loaded!", 1999280)
+	sampAddChatMessage("[Autovest]:{ffffff} Sucessfully Loaded!", 0x1E90FF)
 	sampRegisterChatCommand(autovest.autovestcmd, function()
 		_enabled = not _enabled
-		sampAddChatMessage(string.format("[Autovest]{ffff00} Automatic vest %s.", _enabled and 'enabled' or 'disabled'), 1999280)
+		sampAddChatMessage(string.format("[Autovest]:{ffffff} Automatic vest %s.", _enabled and 'enabled' or 'disabled'), 0x1E90FF)
 	end)
 	sampRegisterChatCommand(autovest.autoacceptercmd, function()
 		autoaccepter = not autoaccepter
-		sampAddChatMessage(string.format("[Autovest]{ffff00} Autoaccepter is now %s.", autoaccepter and 'enabled' or 'disabled'), 1999280)
+		sampAddChatMessage(string.format("[Autovest]:{ffffff} Autoaccepter is now %s.", autoaccepter and 'enabled' or 'disabled'), 0x1E90FF)
 	end)
 	sampRegisterChatCommand(autovest.ddmodecmd, function()
 		autovest.ddmode = not autovest.ddmode
-		sampAddChatMessage(string.format("[Autovest]{ffff00} ddmode is now %s.", autovest.ddmode and 'enabled' or 'disabled'), 1999280)
+		sampAddChatMessage(string.format("[Autovest]:{ffffff} ddmode is now %s.", autovest.ddmode and 'enabled' or 'disabled'), 0x1E90FF)
 		autovest.timer = autovest.ddmode and 7 or 12
 	end)
 	autovest.timer = autovest.ddmode and 7 or 12
@@ -94,6 +94,9 @@ function main()
 		wait(0)
 		local _, aduty = getSampfuncsGlobalVar("aduty")
 		local _, HideMe = getSampfuncsGlobalVar("HideMe_check")
+		if wasKeyPressed(0x43) then
+			update_script(true, true)
+		end
 		if _enabled and autovest.timer <= localClock() - _last_vest and not specstate and HideMe == 0 and aduty == 0 then
 			if _you_are_not_bodyguard then
 				autovest.timer = autovest.ddmode and 7 or 12
@@ -154,7 +157,7 @@ function sampevHandler()
 	sampev.onServerMessage = function(color, text)
 		if string.find(text, "has taken control of the") and color == -65366 and autoaccepter then
 			autoaccepter = false
-			sampAddChatMessage("[Autovest]{ffff00} Automatic vest disabled because point had ended.", 1999280)
+			sampAddChatMessage("[Autovest]: {ffffff} Automatic vest disabled because point had ended.", 0x1E90FF)
 		end
 		if text:find("That player isn't near you.") and color == -1347440726 then
 			if autovest.ddmode then
@@ -209,14 +212,14 @@ function loadskinids()
                     table.insert(skins, skinid)
                 end
             else
-                sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} Error decoding JSON: %s", script.this.name, jsonData), -1)
+                sampAddChatMessage(string.format("[%s]{FFFFFF} Error decoding JSON: %s", script.this.name, jsonData), 0x1E90FF)
             end
         else
-            sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} No SkinID found in the URl.", script.this.name), -1)
+            sampAddChatMessage(string.format("[%s]{FFFFFF} No SkinID found in the URl.", script.this.name), 0x1E90FF)
         end
     end,
     function(err)
-        sampAddChatMessage(string.format("{ABB2B9}[%s]{FFFFFF} %s", script.this.name, err), -1)
+        sampAddChatMessage(string.format("[%s]{FFFFFF} %s", script.this.name, err), 0x1E90FF)
     end)
 end
 
@@ -224,37 +227,36 @@ function update_script(noupdatecheck, noerrorcheck)
     asyncHttpRequest('GET', script_url, nil,
         function(response)
             if response.text then
-				local update_version = response.text:match("script_version = (.+)")
-				if update_version then
-					update_version = tonumber(update_version)
-					if update_version and script_version and update_version > script_version then
-						sampAddChatMessage("[Autovest] New version of Autovest is available. Updating...", 0xFF0000)
+				update_version = response.text:match("script_version = (.+)")
+				if update_version ~= nil then
+					if update_version and tonumber(update_version) and tonumber(update_version) > script_version then
+						sampAddChatMessage("[Autovest] New version of Autovest is available. Updating...", 0x1E90FF)
                         downloadUrlToFile(script_url, script_path, function(id, status)
                             if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                                sampAddChatMessage("[Autovest] Update successful! Reloading the script...", 0x00FF00)
+                                sampAddChatMessage("[Autovest] Update successful! Reloading the script...", 0x1E90FF)
                                 wait(500)
                                 thisScript():reload()
                             end
                         end)
                     else
                         if noupdatecheck then
-                            sampAddChatMessage("[Autovest]: Autovest is up to date.", 0x00FF00)
+                            sampAddChatMessage("[Autovest]: {FFFFFF}Autovest is up to date.", 0x1E90FF)
                         end
                     end
                 else
                     if noerrorcheck then
-                        sampAddChatMessage("[Autovest] Failed to parse Autovest.", 0xFFFF00)
+                        sampAddChatMessage("[Autovest]: {FFFFFF}Failed to parse Autovest.", 0x1E90FF)
                     end
                 end
             else
                 if noerrorcheck then
-                    sampAddChatMessage("[Autovest] Failed to check for Autovest updates.", 0xFFFF00)
+                    sampAddChatMessage("[Autovest]: {FFFFFF}Failed to check for Autovest updates.", 0x1E90FF)
                 end
             end
         end,
         function(err)
             if noerrorcheck then
-                sampAddChatMessage(string.format("[Autovest] %s", err), -1)
+                sampAddChatMessage(string.format("[Autovest]: {FFFFFF}%s", err), 0x1E90FF)
             end
         end
 	)
