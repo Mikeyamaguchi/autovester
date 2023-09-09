@@ -195,11 +195,13 @@ function sampevHandler()
 				_last_vest = localClock() - 6.8
 			else
 				_last_vest = localClock() - 11.8
+				return false
 			end
 		end
 		if text:find("You must wait") and text:find("seconds before selling another vest.") then
 			cooldown = text:find("wait %d+ seconds")
 			autovest.timer = cooldown + 0.5
+			return false
 		end
 		if text:find("You are not a bodyguard.") and color ==  -1347440726 then
 			_you_are_not_bodyguard = false
