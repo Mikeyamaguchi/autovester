@@ -1,7 +1,7 @@
 script_name("Autovest")
-script_version("2.9")
+script_version("1.9")
 script_author("Mike")
-local script_version = 2.9
+local script_version = 1.9
 --original_author("akacross")
 require("moonloader")
 require("sampfuncs")
@@ -15,6 +15,7 @@ local script_path = thisScript().path
 local script_url = "https://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/autovest.lua"
 local _last_vest = 0
 local _enabled = true
+local autoupdate = true
 local specstate = false
 local autoaccepter = false
 local autoacceptertoggle = false
@@ -63,6 +64,9 @@ function main()
 		end
 	else
 		setSampfuncsGlobalVar('HideMe_check', 0)
+	end
+	if autoupdate then
+		update_script(false, false)
 	end
 	autovest.timer = autovest.ddmode and 7 or 12
 	sampAddChatMessage("[Autovest]{ffff00} vestmode is currently set to "..vestmodename(autovest.vestmode)..".", 1999280)
