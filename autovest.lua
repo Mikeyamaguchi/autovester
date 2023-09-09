@@ -1,5 +1,5 @@
 script_name("Autovest")
-script_version("1.8")
+script_version("2.9")
 script_author("Mike")
 local script_version = 2.9
 --original_author("akacross")
