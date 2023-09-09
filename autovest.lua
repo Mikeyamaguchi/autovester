@@ -1,7 +1,7 @@
 script_name("Autovest")
-script_version("2.0")
+script_version("2.2)
 script_author("Mike")
-local script_version = 2.0
+local script_version = 2.2
 --original_author("akacross")
 require("moonloader")
 require("sampfuncs")
@@ -227,36 +227,37 @@ function update_script(noupdatecheck, noerrorcheck)
     asyncHttpRequest('GET', script_url, nil,
         function(response)
             if response.text then
-				update_version = response.text:match("script_version = (.+)")
-				if update_version ~= nil then
-					if update_version and tonumber(update_version) and tonumber(update_version) > script_version then
-						sampAddChatMessage("[Autovest] New version of Autovest is available. Updating...", 0x1E90FF)
+                local update_version = response.text:match("script_version = (%d+%.?%d*)")
+                if update_version then
+                    update_version = tonumber(update_version)
+                    if update_version > script_version then
+                        sampAddChatMessage("[Autovest] New version of Autovest is available. Updating...", 0xFF0000)
                         downloadUrlToFile(script_url, script_path, function(id, status)
                             if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                                sampAddChatMessage("[Autovest] Update successful! Reloading the script...", 0x1E90FF)
+                                sampAddChatMessage("[Autovest] Update successful! Reloading the script...", 0x00FF00)
                                 wait(500)
                                 thisScript():reload()
                             end
                         end)
                     else
                         if noupdatecheck then
-                            sampAddChatMessage("[Autovest]: {FFFFFF}Autovest is up to date.", 0x1E90FF)
+                            sampAddChatMessage("[Autovest]: Autovest is up to date.", 0x00FF00)
                         end
                     end
                 else
                     if noerrorcheck then
-                        sampAddChatMessage("[Autovest]: {FFFFFF}Failed to parse Autovest.", 0x1E90FF)
+                        sampAddChatMessage("[Autovest] Failed to parse Autovest.", 0xFFFF00)
                     end
                 end
             else
                 if noerrorcheck then
-                    sampAddChatMessage("[Autovest]: {FFFFFF}Failed to check for Autovest updates.", 0x1E90FF)
+                    sampAddChatMessage("[Autovest] Failed to check for Autovest updates.", 0xFFFF00)
                 end
             end
         end,
         function(err)
             if noerrorcheck then
-                sampAddChatMessage(string.format("[Autovest]: {FFFFFF}%s", err), 0x1E90FF)
+                sampAddChatMessage(string.format("[Autovest] %s", err), -1)
             end
         end
 	)
