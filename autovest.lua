@@ -1,8 +1,8 @@
 script_name("Autovest")
-script_version("4.1")
+script_version("5.1")
 script_author("Mike")
-local script_version = 4.1
---original_author("akacross")
+local script_version = 5.1
+--credits_to("akacross")
 require("moonloader")
 require("sampfuncs")
 require('extensions-lite')
@@ -16,10 +16,8 @@ local cfg = path .. thisScript().name .. '.json'
 local script_path = thisScript().path
 local skinsurl = "https://raw.githubusercontent.com/89181105/autovest/main/skins.json"
 local script_url = "https://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/autovest.lua"
-local factions_color = {-14269954, -7500289, -14911565}
 local _last_vest = 0
 local _enabled = true
-local autoupdate = true
 local specstate = false
 local autoaccepter = false
 local autoacceptertoggle = false
@@ -32,7 +30,7 @@ local autovest = {
     autovestcmd = "avest",
     autoacceptercmd = "av",
     ddmodecmd = "ddmode",
-    timer = 12,
+    timer = 10,
     ddmode = false,
     enablebydefault = true,
 }
@@ -66,25 +64,23 @@ function main()
 	else
 		setSampfuncsGlobalVar('HideMe_check', 0)
 	end
-	if autoupdate then
-		update_script(false, false)
-	end
-	autovest.timer = autovest.ddmode and 7 or 12
-	sampAddChatMessage("[Autovest]:{ffffff} Sucessfully Loaded!", 0x1E90FF)
+	update_script(false, false)
+	autovest.timer = autovest.ddmode and 5 or 10
+	sampAddChatMessage("[Autovest]: {ffffff}Sucessfully Loaded!", 0x1E90FF)
 	sampRegisterChatCommand(autovest.autovestcmd, function()
 		_enabled = not _enabled
-		sampAddChatMessage(string.format("[Autovest]:{ffffff} Autovester %s.", _enabled and 'enabled' or 'disabled'), 0x1E90FF)
+		sampAddChatMessage(string.format("[Autovest]: {ffffff} is now %s.", _enabled and 'activated' or 'deactivated'), 0x1E90FF)
 	end)
 	sampRegisterChatCommand(autovest.autoacceptercmd, function()
 		autoaccepter = not autoaccepter
-		sampAddChatMessage(string.format("[Autovest]:{ffffff} Auto Accept Vest is now %s.", autoaccepter and 'enabled' or 'disabled'), 0x1E90FF)
+		sampAddChatMessage(string.format("[Autovest]: {ffffff}Auto Accept Vest is now %s.", autoaccepter and 'activated' or 'deactivated'), 0x1E90FF)
 	end)
 	sampRegisterChatCommand(autovest.ddmodecmd, function()
 		autovest.ddmode = not autovest.ddmode
-		sampAddChatMessage(string.format("[Autovest]:{ffffff}Diamond Donator Mode is now %s.", autovest.ddmode and 'enabled' or 'disabled'), 0x1E90FF)
-		autovest.timer = autovest.ddmode and 7 or 12
+		sampAddChatMessage(string.format("[Autovest]: {ffffff}Diamond Donator Mode is now %s.", autovest.ddmode and 'activated' or 'deactivated'), 0x1E90FF)
+		autovest.timer = autovest.ddmode and 5 or 10
 	end)
-	autovest.timer = autovest.ddmode and 7 or 12
+	autovest.timer = autovest.ddmode and 5 or 10
     if autovest.ddmode then
 		_you_are_not_bodyguard = true
 	end
@@ -98,7 +94,7 @@ function main()
 		local _, HideMe = getSampfuncsGlobalVar("HideMe_check")
 		if _enabled and autovest.timer <= localClock() - _last_vest and not specstate and HideMe == 0 and aduty == 0 then
 			if _you_are_not_bodyguard then
-				autovest.timer = autovest.ddmode and 7 or 12
+				autovest.timer = autovest.ddmode and 5 or 10
 				for PlayerID = 0, sampGetMaxPlayerId(false) do
 					local result, playerped = sampGetCharHandleBySampPlayerId(PlayerID)
 					if result and not sampIsPlayerPaused(PlayerID) then
@@ -111,12 +107,9 @@ function main()
 								local pAnimId2 = sampGetPlayerAnimationId(playerid)
 								local aim, _ = getCharPlayerIsTargeting(h)
 								if pAnimId ~= 1158 and pAnimId ~= 1159 and pAnimId ~= 1160 and pAnimId ~= 1161 and pAnimId ~= 1162
-								    and pAnimId ~= 1163 and pAnimId ~= 1164 and pAnimId ~= 1165 and pAnimId ~= 1166 and pAnimId ~= 1167
-								    and pAnimId ~= 1069 and pAnimId ~= 1070 and pAnimId2 ~= 746 and not aim then
-									local color = sampGetPlayerColor(PlayerID)
-									local r, g, b = hex2rgb(color)
-									color = join_argb_int(255, r, g, b)
-									if has_number(skins, getCharModel(ped)) and not has_number(factions_color, color) then
+								and pAnimId ~= 1163 and pAnimId ~= 1164 and pAnimId ~= 1165 and pAnimId ~= 1166 and pAnimId ~= 1167
+								and pAnimId ~= 1069 and pAnimId ~= 1070 and pAnimId2 ~= 746 and not aim then
+									if has_number(skins, getCharModel(playerped)) then
 										sendGuard(PlayerID)
 									end
 									if autoaccepter and autoacceptertoggle then
@@ -131,9 +124,6 @@ function main()
 													if autoaccepternickname == autoaccepternick then
 														sampSendChat("/accept bodyguard")
 														autoacceptertoggle = false
-													end
-													if getPadState(h, keys.player.SPRINT) == 255 and (isCharOnFoot(ped) or isCharInWater(ped)) then
-														setGameKeyUpDown(keys.player.SPRINT, 255, 0)
 													end
 												end
 											end
@@ -158,33 +148,11 @@ function sendGuard(id)
 	_last_vest = localClock()
 end
 
-function hex2rgb(rgba)
-	local a = bit.band(bit.rshift(rgba, 24),	0xFF)
-	local r = bit.band(bit.rshift(rgba, 16),	0xFF)
-	local g = bit.band(bit.rshift(rgba, 8),		0xFF)
-	local b = bit.band(rgba, 0xFF)
-	return r / 255, g / 255, b / 255
-end
-
-function join_argb_int(a, r, g, b)
-	local argb = b * 255
-    argb = bit.bor(argb, bit.lshift(g * 255, 8))
-    argb = bit.bor(argb, bit.lshift(r * 255, 16))
-    argb = bit.bor(argb, bit.lshift(a, 24))
-    return argb
-end
-
-function setGameKeyUpDown(key, value, delay)
-	setGameKeyState(key, value)
-	wait(delay)
-	setGameKeyState(key, 0)
-end
-
 function sampevHandler()
 	sampev.onServerMessage = function(color, text)
 		if string.find(text, "has taken control of the") and color == -65366 and autoaccepter then
 			autoaccepter = false
-			sampAddChatMessage("[Autovest]: {ffffff} Automatic vest disabled because point had ended.", 0x1E90FF)
+			sampAddChatMessage("[Autovest]: {ffffff}Auto accept vest deactivated as the point has concluded", 0x1E90FF)
 		end
 		if text:find("That player isn't near you.") and color == -1347440726 then
 			if autovest.ddmode then
@@ -239,14 +207,14 @@ function loadskinids()
                     table.insert(skins, skinid)
                 end
             else
-                sampAddChatMessage(string.format("[%s]{FFFFFF} Error decoding JSON: %s", script.this.name, jsonData), 0x1E90FF)
+                sampAddChatMessage(string.format("[%s] {FFFFFF}Error decoding JSON: %s", script.this.name, jsonData), 0x1E90FF)
             end
         else
-            sampAddChatMessage(string.format("[%s]{FFFFFF} No SkinID found in the URl.", script.this.name), 0x1E90FF)
+            sampAddChatMessage(string.format("[%s] {FFFFFF}No SkinID found in the URl.", script.this.name), 0x1E90FF)
         end
     end,
     function(err)
-        sampAddChatMessage(string.format("[%s]{FFFFFF} %s", script.this.name, err), 0x1E90FF)
+        sampAddChatMessage(string.format("[%s] {FFFFFF}%s", script.this.name, err), 0x1E90FF)
     end)
 end
 
@@ -258,33 +226,33 @@ function update_script(noupdatecheck, noerrorcheck)
                 if update_version then
                     update_version = tonumber(update_version)
                     if update_version > script_version then
-                        sampAddChatMessage("[Autovest] New version of Autovest is available. Updating...", 0xFF0000)
+                        sampAddChatMessage("[Autovest]: {FFFFFF}Fresh Autovest version ready. Update rolling...", 0x1E90FF)
                         downloadUrlToFile(script_url, script_path, function(id, status)
                             if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                                sampAddChatMessage("[Autovest] Update successful! Reloading the script...", 0x00FF00)
+                                sampAddChatMessage("[Autovest]: {FFFFFF}Update complete! Reloading Autovest...", 0x1E90FF)
                                 wait(500)
                                 thisScript():reload()
                             end
                         end)
                     else
                         if noupdatecheck then
-                            sampAddChatMessage("[Autovest]: Autovest is up to date.", 0x00FF00)
+                            sampAddChatMessage("[Autovest]: {FFFFFF}Autovest is up to date.", 0x1E90FF)
                         end
                     end
                 else
                     if noerrorcheck then
-                        sampAddChatMessage("[Autovest] Failed to parse Autovest.", 0xFFFF00)
+                        sampAddChatMessage("[Autovest]: {FFFFFF}Failed to parse Autovest.", 0x1E90FF)
                     end
                 end
             else
                 if noerrorcheck then
-                    sampAddChatMessage("[Autovest] Failed to check for Autovest updates.", 0xFFFF00)
+                    sampAddChatMessage("[Autovest]: {FFFFFF}Failed to check for Autovest updates.", 0x1E90FF)
                 end
             end
         end,
         function(err)
             if noerrorcheck then
-                sampAddChatMessage(string.format("[Autovest] %s", err), -1)
+                sampAddChatMessage(string.format("[Autovest]: {FFFFFF}%s", err), 0x1E90FF)
             end
         end
 	)
@@ -300,7 +268,8 @@ function asyncHttpRequest(method, url, args, resolve, reject)
         else
             return false, response
         end
-    end)(method, url, args)
+    end)
+	(method, url, args)
     if not resolve then
         resolve = function()
         end
@@ -366,7 +335,7 @@ function saveJson()
 end
 
 function has_number(tab, val)
-    for index, value in ipairs(tab) do
+    for _, value in ipairs(tab) do
         if tonumber(value) == val then
             return true
         end
