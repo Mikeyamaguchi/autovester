@@ -1,7 +1,7 @@
 script_name("Autovest")
-script_version("5.1")
+script_version("5.2")
 script_author("Mike")
-local script_version = 5.1
+local script_version = 5.2
 --credits_to("akacross")
 require("moonloader")
 require("sampfuncs")
