@@ -1,13 +1,14 @@
 script_name("Autovest")
-script_version("2.2")
+script_version("4.1")
 script_author("Mike")
-local script_version = 2.2
+local script_version = 4.1
 --original_author("akacross")
 require("moonloader")
 require("sampfuncs")
 require('extensions-lite')
 local sampev = require('lib.samp.events')
 local dlstatus = require('moonloader').download_status
+local keys  = require('game.keys')
 local effil = require("effil")
 local json = require("dkjson")
 local path = getWorkingDirectory() .. '\\config\\' 
@@ -15,6 +16,7 @@ local cfg = path .. thisScript().name .. '.json'
 local script_path = thisScript().path
 local skinsurl = "https://raw.githubusercontent.com/89181105/autovest/main/skins.json"
 local script_url = "https://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/autovest.lua"
+local factions_color = {-14269954, -7500289, -14911565}
 local _last_vest = 0
 local _enabled = true
 local autoupdate = true
@@ -71,15 +73,15 @@ function main()
 	sampAddChatMessage("[Autovest]:{ffffff} Sucessfully Loaded!", 0x1E90FF)
 	sampRegisterChatCommand(autovest.autovestcmd, function()
 		_enabled = not _enabled
-		sampAddChatMessage(string.format("[Autovest]:{ffffff} Automatic vest %s.", _enabled and 'enabled' or 'disabled'), 0x1E90FF)
+		sampAddChatMessage(string.format("[Autovest]:{ffffff} Autovester %s.", _enabled and 'enabled' or 'disabled'), 0x1E90FF)
 	end)
 	sampRegisterChatCommand(autovest.autoacceptercmd, function()
 		autoaccepter = not autoaccepter
-		sampAddChatMessage(string.format("[Autovest]:{ffffff} Autoaccepter is now %s.", autoaccepter and 'enabled' or 'disabled'), 0x1E90FF)
+		sampAddChatMessage(string.format("[Autovest]:{ffffff} Auto Accept Vest is now %s.", autoaccepter and 'enabled' or 'disabled'), 0x1E90FF)
 	end)
 	sampRegisterChatCommand(autovest.ddmodecmd, function()
 		autovest.ddmode = not autovest.ddmode
-		sampAddChatMessage(string.format("[Autovest]:{ffffff} ddmode is now %s.", autovest.ddmode and 'enabled' or 'disabled'), 0x1E90FF)
+		sampAddChatMessage(string.format("[Autovest]:{ffffff}Diamond Donator Mode is now %s.", autovest.ddmode and 'enabled' or 'disabled'), 0x1E90FF)
 		autovest.timer = autovest.ddmode and 7 or 12
 	end)
 	autovest.timer = autovest.ddmode and 7 or 12
@@ -94,9 +96,6 @@ function main()
 		wait(0)
 		local _, aduty = getSampfuncsGlobalVar("aduty")
 		local _, HideMe = getSampfuncsGlobalVar("HideMe_check")
-		if wasKeyPressed(0x43) then
-			update_script(true, true)
-		end
 		if _enabled and autovest.timer <= localClock() - _last_vest and not specstate and HideMe == 0 and aduty == 0 then
 			if _you_are_not_bodyguard then
 				autovest.timer = autovest.ddmode and 7 or 12
@@ -112,9 +111,12 @@ function main()
 								local pAnimId2 = sampGetPlayerAnimationId(playerid)
 								local aim, _ = getCharPlayerIsTargeting(h)
 								if pAnimId ~= 1158 and pAnimId ~= 1159 and pAnimId ~= 1160 and pAnimId ~= 1161 and pAnimId ~= 1162
-								and pAnimId ~= 1163 and pAnimId ~= 1164 and pAnimId ~= 1165 and pAnimId ~= 1166 and pAnimId ~= 1167
-								and pAnimId ~= 1069 and pAnimId ~= 1070 and pAnimId2 ~= 746 and not aim then
-									if has_number(skins, getCharModel(ped)) then
+								    and pAnimId ~= 1163 and pAnimId ~= 1164 and pAnimId ~= 1165 and pAnimId ~= 1166 and pAnimId ~= 1167
+								    and pAnimId ~= 1069 and pAnimId ~= 1070 and pAnimId2 ~= 746 and not aim then
+									local color = sampGetPlayerColor(PlayerID)
+									local r, g, b = hex2rgb(color)
+									color = join_argb_int(255, r, g, b)
+									if has_number(skins, getCharModel(ped)) and not has_number(factions_color, color) then
 										sendGuard(PlayerID)
 									end
 									if autoaccepter and autoacceptertoggle then
@@ -129,6 +131,9 @@ function main()
 													if autoaccepternickname == autoaccepternick then
 														sampSendChat("/accept bodyguard")
 														autoacceptertoggle = false
+													end
+													if getPadState(h, keys.player.SPRINT) == 255 and (isCharOnFoot(ped) or isCharInWater(ped)) then
+														setGameKeyUpDown(keys.player.SPRINT, 255, 0)
 													end
 												end
 											end
@@ -151,6 +156,28 @@ function sendGuard(id)
 		sampSendChat(string.format("/guard %d 200", id))
 	end
 	_last_vest = localClock()
+end
+
+function hex2rgb(rgba)
+	local a = bit.band(bit.rshift(rgba, 24),	0xFF)
+	local r = bit.band(bit.rshift(rgba, 16),	0xFF)
+	local g = bit.band(bit.rshift(rgba, 8),		0xFF)
+	local b = bit.band(rgba, 0xFF)
+	return r / 255, g / 255, b / 255
+end
+
+function join_argb_int(a, r, g, b)
+	local argb = b * 255
+    argb = bit.bor(argb, bit.lshift(g * 255, 8))
+    argb = bit.bor(argb, bit.lshift(r * 255, 16))
+    argb = bit.bor(argb, bit.lshift(a, 24))
+    return argb
+end
+
+function setGameKeyUpDown(key, value, delay)
+	setGameKeyState(key, value)
+	wait(delay)
+	setGameKeyState(key, 0)
 end
 
 function sampevHandler()
