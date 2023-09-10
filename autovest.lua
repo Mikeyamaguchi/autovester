@@ -3,7 +3,6 @@ script_version("5.2")
 script_author("Mike")
 local script_version = 5.2
 --credits_to("akacross")
-require("moonloader")
 require("sampfuncs")
 require('extensions-lite')
 local sampev = require('lib.samp.events')
