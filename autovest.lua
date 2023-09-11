@@ -68,7 +68,7 @@ function main()
 	sampAddChatMessage("[Autovest]: {ffffff}Sucessfully Loaded!", 0x1E90FF)
 	sampRegisterChatCommand(autovest.autovestcmd, function()
 		_enabled = not _enabled
-		sampAddChatMessage(string.format("[Autovest]: {ffffff} is now %s.", _enabled and 'activated' or 'deactivated'), 0x1E90FF)
+		sampAddChatMessage(string.format("[Autovest]: {ffffff}Autovest is now %s.", _enabled and 'activated' or 'deactivated'), 0x1E90FF)
 	end)
 	sampRegisterChatCommand(autovest.autoacceptercmd, function()
 		autoaccepter = not autoaccepter
