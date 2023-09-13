@@ -1,13 +1,12 @@
 script_name("Autovest")
-script_version("5.2")
+script_version("6.3")
 script_author("Mike")
-local script_version = 5.2
+local script_version = 6.3
 --credits_to("akacross")
 require("sampfuncs")
 require('extensions-lite')
 local sampev = require('lib.samp.events')
 local dlstatus = require('moonloader').download_status
-local keys  = require('game.keys')
 local effil = require("effil")
 local json = require("dkjson")
 local path = getWorkingDirectory() .. '\\config\\' 
@@ -109,7 +108,12 @@ function main()
 								and pAnimId ~= 1163 and pAnimId ~= 1164 and pAnimId ~= 1165 and pAnimId ~= 1166 and pAnimId ~= 1167
 								and pAnimId ~= 1069 and pAnimId ~= 1070 and pAnimId2 ~= 746 and not aim then
 									if has_number(skins, getCharModel(playerped)) then
-										sendGuard(PlayerID)
+										if autovest.ddmode then
+											sampSendChat('/guardnear')
+										else
+											sampSendChat(string.format("/guard %d 200", PlayerID))
+										end
+										_last_vest = localClock()
 									end
 									if autoaccepter and autoacceptertoggle then
 										local _, playerped = storeClosestEntities(ped)
@@ -136,15 +140,6 @@ function main()
 			end
 		end
 	end
-end
-
-function sendGuard(id)
-	if autovest.ddmode then
-		sampSendChat('/guardnear')
-	else
-		sampSendChat(string.format("/guard %d 200", id))
-	end
-	_last_vest = localClock()
 end
 
 function sampevHandler()
@@ -221,10 +216,9 @@ function update_script(noupdatecheck, noerrorcheck)
     asyncHttpRequest('GET', script_url, nil,
         function(response)
             if response.text then
-                local update_version = response.text:match("script_version = (%d+%.?%d*)")
-                if update_version then
-                    update_version = tonumber(update_version)
-                    if update_version > script_version then
+                local update_version = response.text:match("script_version = (.+)")
+                if update_version ~= nil then
+					if tonumber(update_version) > script_version then
                         sampAddChatMessage("[Autovest]: {FFFFFF}Fresh Autovest version ready. Update rolling...", 0x1E90FF)
                         downloadUrlToFile(script_url, script_path, function(id, status)
                             if status == dlstatus.STATUS_ENDDOWNLOADDATA then
@@ -311,8 +305,8 @@ end
 
 function blankJson()
     autovest = table.deepcopy(blank)
+	repairmissing()
     saveJson()
-    loadJson()
 end
 
 function loadJson()
@@ -322,15 +316,43 @@ function loadJson()
         f:close()
         autovest = json.decode(jsonData)
     end
+	repairmissing()
+	saveJson()
 end
 
 function saveJson()
     local f = io.open(cfg, "w")
     if f then
         local jsonData = json.encode(autovest, { indent = true })
-        f:write(jsonData)
-        f:close()
+        if jsonData then
+            f:write(jsonData)
+            f:close()
+        end
     end
+end
+
+function repairmissing()
+	if autovest.autosave == nil then
+		autovest.autosave = true
+	end
+	if autovest.ddmode == nil then
+		autovest.ddmode = false
+	end
+	if autovest.enablebydefault == nil then
+		autovest.enablebydefault = true
+	end
+	if autovest.timer == nil then
+		autovest.timer = 10
+	end
+	if autovest.autovestcmd == nil then
+		autovest.autovestcmd = "avest"
+	end
+	if autovest.autoacceptercmd == nil then
+		autovest.autoacceptercmd = "av"
+	end
+	if autovest.ddmodecmd == nil then
+		autovest.ddmodecmd = "ddmode"
+	end
 end
 
 function has_number(tab, val)
