@@ -1,7 +1,7 @@
 script_name("Autovest")
-script_version("6.3")
+script_version("7.4")
 script_author("Mike")
-local script_version = 6.3
+local script_version = 7.4
 --credits_to("akacross")
 require("sampfuncs")
 require('extensions-lite')
@@ -216,9 +216,10 @@ function update_script(noupdatecheck, noerrorcheck)
     asyncHttpRequest('GET', script_url, nil,
         function(response)
             if response.text then
-                local update_version = response.text:match("script_version = (.+)")
-                if update_version ~= nil then
-					if tonumber(update_version) > script_version then
+                local update_version = response.text:match("script_version = (%d+%.?%d*)")
+                if update_version then
+                    update_version = tonumber(update_version)
+                    if update_version > script_version then
                         sampAddChatMessage("[Autovest]: {FFFFFF}Fresh Autovest version ready. Update rolling...", 0x1E90FF)
                         downloadUrlToFile(script_url, script_path, function(id, status)
                             if status == dlstatus.STATUS_ENDDOWNLOADDATA then
@@ -365,3 +366,4 @@ function has_number(tab, val)
 end
 
 sampevHandler()
+ 
