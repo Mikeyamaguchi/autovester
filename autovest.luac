@@ -66,12 +66,12 @@ Commandsautoaccept
 autovest
 timerddmode
 autosaveGeneralS 	  6    BX€6  B X€+ L ER÷+ L 
-tonumberipairsó  ,J6   ' B 6  ' B 6  ' B *   6 ' B6 ' B6 '	 B9
+tonumberipairsô  ,J6   ' B 6  ' B 6  ' B *   6 ' B6 ' B6 '	 B9
 6 ' B6 ' B6
  B' & 6 B9' &6 B9' '	 '
  )  + +
  + 6 6 4  4  3 7 3 7 3 7 3 7 3  7! 3" 7# 3$ 7% 3& 7' 3( 7) 3* 7+ 6 B2  €K  has_number repairmissing LoadIni 
-blankIni onScriptTerminate asyncHttpRequest update_script loadskinids sampevHandler 	main playerHandleplayerPedQhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/autovest.luaPhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/version.txtNhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/skins.txt	path	.ini	namethisScript
+blankIni onScriptTerminate asyncHttpRequest update_script loadskinids sampevHandler 	main playerHandleplayerPedRhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/autovest.luacPhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/version.txtNhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/skins.txt	path	.ini	namethisScript
 \config\getWorkingDirectoryinicfg
 effildownload_statusmoonloaderlib.samp.eventssampfuncsrequire	Mikescript_author2.8script_version
 Autovestscript_nameÍ™³ææÌ™€ 
