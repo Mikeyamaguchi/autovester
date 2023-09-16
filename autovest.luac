@@ -1,0 +1,77 @@
+LJÙ  -   9   -  9 9 = 6  6 9' -  9 9  X€' X€' B*  B K   deactivatedactivated,[Autovest]: {ffffff}Autovest is now %s.formatstringsampAddChatMessage
+autovestGeneralþÃôã  -   9   -  9 9 = 6  6 9' -  9 9  X€' X€' B*  B K   deactivatedactivated4[Autovest]: {ffffff}Auto Accept Vest is now %s.formatstringsampAddChatMessageautoacceptGeneralþÃô•  	"-   9   -  9 9 = 6  6 9' -  9 9  X€' X€' B*  B -   9   -  9 9  X€) X€)
+ = K   
+timerdeactivatedactivated8[Autovest]: {ffffff}Diamond Donator Mode is now %s.formatstringsampAddChatMessageddmodeGeneralþÃô˜ *
+3Ù6   -  B    X €6  -  B 6  - B    X€6  B X €6  B 6  B    X €U €6  )d B X ÷6  ' B    X€	  X	€6	 ' )  BX€6	 ' )  B6 '
+ B  X€	  X	€6	 '
+ )  BX€6	 '
+ )  B- 9- 99
+  X€) X€)
+ =6 ' * B6 - 993 B6 - 993 B6 - 99
+3 B- 9- 99
+  X€) X€)
+ =6 B6 + + BUê€6 )  B6 ' B6 '
+ B- 99  X	ñ- 996	 B	-
+ !	
+		 Xè-   Xå	  Xã	  Xá-   X	Þ- 9-	 9		9	
+	 	 X
+€)	 X
+€)	
+ =	)  6	 +
+ B	)
+ M·€6 
+ B  X±€6  B  X¬€6 - B6 
+ B6       B- 99
+  X€6  B  X€ - 99
+  X€6 * B  X€)  X†€6   B)1  X€€6! 6" ) 6# - B A A 6! 6$ B6% - B Xp€ Xn€ Xl€ Xj€ Xh€ Xf€	 Xd€
+ Xb€ X`€ X^€
+ X\€ XZ€ XX€  XV€6& - 6' 
+ B A  X€- 99
+  X€6( ') BX€6( 6* 9+',  B A 6 B. - 99  X6€-	   X3€6- - B6#  B  X+€-  X(€6. - B)1  X"€6! - B X€6/  B70 6 - B6  ! B 6# $ % & '  (! )" B#)$ #$ X#€6#0 6$1 #$ X#€6#( '$2 B#1	 OIXK  ÀÀ€€€€ÀÀÀ
+€/accept bodyguardautoaccepternickautoaccepternicknamesampGetPlayerNicknamegetCharArmourstoreClosestEntities/guard %d 200formatstring/guardnearsampSendChatgetCharModelhas_numbergetCharPlayerIsTargeting
+playerid sampGetPlayerIdByCharHandleselectsampGetPlayerAnimationIdsampGetPlayerArmor
+tostringgetDistanceBetweenCoords3dgetCharCoordinatessampIsPlayerPaused$sampGetCharHandleBySampPlayerIdsampGetMaxPlayerIdlocalClockupdate_scriptloadskinids  autoaccept 
+autovest
+CommandssampRegisterChatCommand-[Autovest]: {ffffff}Successfully Loaded!sampAddChatMessageddmode
+timerGeneralHideMe_checksetSampfuncsGlobalVar
+adutygetSampfuncsGlobalVar	waitisSampAvailable
+blankIniLoadInidoesFileExistcreateDirectorydoesDirectoryExist þÃô›³æÌÌ™³ÿŒŽ’”–˜šœžÚÜÔ   .   K     ©6  9 ' B  X€	   X
+€-  99  X€-  9+ =6 ' * B 9' B  X€	  X€-  99  X€6	 B. X€6	 B.  9'
+ B  X€	  X€-  99  X€6	 B. X€6	 B. + 2 c€ 9' B  X€ 9' B  X€ 9'
+ B7 -  96 =+ 2 L€ 9' B  X€	  X€1  9' B  X€1  9' B  X4€ 9' B  X.€	  X,€)(   X€ X
+€ 9' B7 6  9' ' B7 1 6 - B)0  X€6 - B X€-  99  X€-   X€6 ' B1 - 3 =K  L L          onTogglePlayerSpectating/accept bodyguardsampSendChatsampGetPlayerAnimationIdgetCharArmour_%s+	gsubautoaccepternickZ%* Bodyguard (.+) wants to protect you for %$200, type %/accept bodyguard to accept%.F wants to protect you for $200, type /accept bodyguard to accept.* Bodyguard D* You are now a Bodyguard, type /help to see your new commands.
+matchYou are not a bodyguard.
+timer
+cooldownwait %d+ seconds)seconds before selling another vest.You must wait#You can't /guard while aiming.localClockddmode That player isn't near you.P[Autovest]: {ffffff}Auto accept vest deactivated as the point has concludedsampAddChatMessageautoacceptGeneralhas taken control of the	findstringÔ‚øÿþÃôÔ¾ýúçÌ™³³æì€µæÌ™™³ž€€€ÿÔþç¼Ô6  -   3 =  K  À€€€
+€À€ onServerMessage³ 		 9  
+  X€9   9' BX€6 9-  6  B AER÷-     X	€6 ' *  BX€6 ' *  BK   ?[Autovest]: {FFFFFF}Failed to fetch Skin IDs from the URL.6[Autovest]: {FFFFFF}No Skin IDs found in the URL.sampAddChatMessage
+tonumberinsert
+table%d+gmatch	textþÃôg  	6  6 9'   B*  BK  [Autovest]: {FFFFFF}%sformatstringsampAddChatMessageþÃôB  6   ' -  +  3 3 B K  ÀÀ  GETasyncHttpRequestÍ -  9  X€6 ' *  B6 )ôB6 B 9BK   reloadthisScript	wait?[Autovest]: {FFFFFF}Update complete! Reloading Autovest...sampAddChatMessageSTATUS_ENDDOWNLOADDATAþÃôì
+$9  
+  X €9   9' B7 6 
+  X€6 6 B-   X
+€6 ' *  B6 - - 3 BX€-   X€6 '	 *  BK       À0[Autovest]: {FFFFFF}Autovest is up to date. downloadUrlToFileH[Autovest]: {FFFFFF}Fresh Autovest version ready. Update rolling...sampAddChatMessage
+tonumberupdate_versionversion: (.+)
+match	textþÃôu -    X€6  6 9'   B*  BK  À[Autovest]: {FFFFFF}%sformatstringsampAddChatMessageþÃôL 	6  ' -  +  3 3 B2  €K  	À À
+ÀÀÀ  GETasyncHttpRequest‡ 	  6  ' B6 9    B  X€, ==+  J X€+  J K  xml	jsonrequest
+pcall
+requestsrequire     K       K  Ä   %-   U"€  9  B  X€ X€  9 B  X€-  BX€-  BK  X	€ X€-  D X€-  D 6 )  BXÝK  À€€	wait
+canceledgetcompletedstatusv	 -  9 3 B    B  X€3   X€3 6 93 B2  €K  À createlua_thread   threadk  6  9  X
+€-  99  X€- 9-  - BK  €ÀÀ	save
+autosaveGeneral	thisscriptH   
+4   .   6   B -  9  -  - B K  €ÀÀ	saverepairmissing]   -  9   +  - B .   6  B -  9  -  - B K  €ÀÀ	saverepairmissing	load©  	 W-   9      X €-   4  =  -   9   9     X €-   9   + = -   9   9     X €-   9   + = -   9   9     X €-   9   )
+ = -   9   9     X €-   9   + = -   9   9     X €-   9   + = -   9     X €-   4  = -   9  9     X €-   9  ' = -   9  9     X €-   9  ' = -   9  9     X €-   9  ' = K  €av
+avest
+Commandsautoaccept
+autovest
+timerddmode
+autosaveGeneralS 	  6    BX€6  B X€+ L ER÷+ L 
+tonumberipairsó  ,J6   ' B 6  ' B 6  ' B *   6 ' B6 ' B6 '	 B9
+6 ' B6 ' B6
+ B' & 6 B9' &6 B9' '	 '
+ )  + +
+ + 6 6 4  4  3 7 3 7 3 7 3 7 3  7! 3" 7# 3$ 7% 3& 7' 3( 7) 3* 7+ 6 B2  €K  has_number repairmissing LoadIni 
+blankIni onScriptTerminate asyncHttpRequest update_script loadskinids sampevHandler 	main playerHandleplayerPedQhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/autovest.luaPhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/version.txtNhttps://raw.githubusercontent.com/Mikeyamaguchi/autovester/main/skins.txt	path	.ini	namethisScript
+\config\getWorkingDirectoryinicfg
+effildownload_statusmoonloaderlib.samp.eventssampfuncsrequire	Mikescript_author2.8script_version
+Autovestscript_nameÍ™³ææÌ™€ 
