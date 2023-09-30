@@ -406,26 +406,3 @@ function repairmissing()
         autovest.Commands.capturfspam = "tcap"
     end
 end
-
-function getTarget(str)
-    if not str then
-        return false
-    end
-    local players = {}
-    local maxPlayerId = sampGetMaxPlayerId(false)
-    for i = 0, maxPlayerId do
-        if sampIsPlayerConnected(i) then
-            local playerName = sampGetPlayerNickname(i)
-            players[i] = playerName
-        end
-    end
-    for playerId, playerName in pairs(players) do
-        local lowerName = playerName:lower()
-        if lowerName:find("^"..str:lower()) or tostring(playerId) == str then
-            local target = tonumber(playerId)
-            local formattedName = playerName:gsub("_", " ")
-            return true, target, formattedName
-        end
-    end
-    return false
-end
