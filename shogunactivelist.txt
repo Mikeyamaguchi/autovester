@@ -44,3 +44,4 @@
 -{02/05/2024]:   Casefile        {ACTIVE}    - Kelly Maxx
 -{02/05/2024]:   Casefile        {ACTIVE}    - Morato S Kolkig
 -{02/05/2024]:   Casefile        {ACTIVE}    - Satoru G Yamaguchi
+-{02/05/2024]:   Casefile        {ACTIVE}    - Lor Major
