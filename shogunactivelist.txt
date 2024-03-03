@@ -40,6 +40,6 @@
 -{01/12/2024]:   Casefile        {ACTIVE}    - Jacob Macer
 -{01/23/2024]:   Casefile        {ACTIVE}    - Ryuji Satoru
 -{02/01/2024]:   Casefile        {ACTIVE}    - Louie Smith
--{02/02/2024]:   Casefile       {ACTIVE}    - Lee Major
--{02/05/2024]:   Casefile       {ACTIVE}    - Kelly Maxx
--{02/05/2024]:   Casefile       {ACTIVE}    - Morato S Kolkig
+-{02/02/2024]:   Casefile        {ACTIVE}    - Lee Major
+-{02/05/2024]:   Casefile        {ACTIVE}    - Kelly Maxx
+-{02/05/2024]:   Casefile        {ACTIVE}    - Morato S Kolkig
