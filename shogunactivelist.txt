@@ -1,0 +1,45 @@
+========================================================
+@Shōgun - 将軍  - ⛩️ ACTIVE CASE FILE
+========================================================
+-{9/12/2023]:   Casefile        {ACTIVE}    -  Russ Norway
+-{8/30/2023]:   Casefile        {ACTIVE}    - Carlo Galante
+-{8/27/2023]:   Casefile        {ACTIVE}    - Daniel Salazar
+-{8/27/2023]:   Casefile        {ACTIVE}    - Don Raza
+-{8/27/2023]:   Casefile        {ACTIVE}    - Patsy Maraz
+-{8/26/2023]:   Casefile        {ACTIVE}    - Saimir Tahiri
+-{8/18/2023]:   Casefile        {ACTIVE}    - Tanay Sarma
+-{9/28/2023]:   Casefile        {ACTIVE}    -  Michael Carini
+-{9/30/2023]:   Casefile        {ACTIVE}    - Don Mehdi
+-{10/02/2023]:   Casefile        {ACTIVE}    - Derek Paradox
+-{10/03/2023]:   Casefile        {ACTIVE}    - Ruiz Bronx
+-{10/03/2023]:   Casefile        {ACTIVE}    - Taylor Miles
+-{10/04/2023]:   Casefile        {ACTIVE}    - James X Capone
+-{10/07/2023]:   Casefile        {ACTIVE}    - Shing Shang Fungs
+-{10/08/2023]:   Casefile        {ACTIVE}    - Skepta Perez
+-{11/21/2023]:   Casefile        {ACTIVE}    - Terence McKenna
+-{11/29/2023]:   Casefile        {ACTIVE}    - Rex Banares
+-{12/01/2023]:   Casefile        {ACTIVE}    - Rastus Keller
+-{12/03/2023]:   Casefile        {ACTIVE}    -  Chedda Santana
+-{12/03/2023]:   Casefile        {ACTIVE}    - Morty Sevyn
+-{12/03/2023]:   Casefile        {ACTIVE}    - Nikoo Ferrari
+-{12/04/2023]:   Casefile        {ACTIVE}    - Kirby Hitler
+-{12/06/2023]:   Casefile        {ACTIVE}    - Chris Ira Morrison
+-{12/07/2023]:   Casefile        {ACTIVE}    - Smail Yousef
+-{12/08/2023]:   Casefile        {ACTIVE}    - Omar Martell
+-{12/08/2023]:   Casefile        {ACTIVE}    - Kevin Parrinon
+-{12/09/2023]:   Casefile        {ACTIVE}    - Karl S. Hayashi
+-{12/09/2023]:   Casefile        {ACTIVE}    - Bastian Baltazar
+-{12/10/2023]:   Casefile        {ACTIVE}    - Jasmine Willams
+-{12/12/2023]:   Casefile        {ACTIVE}    - Kelly Morrison 
+-{01/03/2024]:   Casefile        {ACTIVE}    -  Theodore Beckham
+-{01/03/2024]:   Casefile        {ACTIVE}    - Giorgio E Armani
+-{01/04/2024]:   Casefile        {ACTIVE}    - Jarad Mason
+-{01/06/2024]:   Casefile        {ACTIVE}    - Harry Kasharel
+-{01/06/2024]:   Casefile        {ACTIVE}    - Dodong S Finish
+-{01/07/2024]:   Casefile        {ACTIVE}    - Kai B Jerusalem
+-{01/12/2024]:   Casefile        {ACTIVE}    - Jacob Macer
+-{01/23/2024]:   Casefile        {ACTIVE}    - Ryuji Satoru
+-{02/01/2024]:   Casefile        {ACTIVE}    - Louie Smith
+-{02/02/2024]:   Casefile       {ACTIVE}    - Lee Major
+-{02/05/2024]:   Casefile       {ACTIVE}    - Kelly Maxx
+-{02/05/2024]:   Casefile       {ACTIVE}    - Morato S Kolkig
