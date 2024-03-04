@@ -42,6 +42,5 @@
 -{02/02/2024]:   Casefile        {ACTIVE}    - Lee Major
 -{05/02/2024]:   Casefile        {ACTIVE}    - Kelly Maxx
 -{05/02/2024]:   Casefile        {ACTIVE}    - Morato S Kolkig
--{05/02/2024]:   Casefile        {ACTIVE}    - Lor Major
 -{02/03/2024]:   Casefile       {ACTIVE}    - Romeo Jefferson
 -{02/29/2024]:   Casefile       {ACTIVE}    - Arc Vieira
