@@ -1,1 +1,22 @@
-[2, 33, 62, 261, 162, 214, 32, 209, 134, 201, 146, 136, 0, 195, 293, 271, 269, 270, 49, 193, 60, 123, 263, 186, 210, 122]
+[
+  {
+    "displayName": "6th Street Kingz",
+    "colorHex": "05631C",
+    "skinIds": [0, 195, 293, 271, 269, 270]
+  },
+  {
+    "displayName": "Oblivions Peak",
+    "colorHex": "CD2A07",
+    "skinIds": [2, 33, 62, 261, 162, 214]
+  },
+  {
+    "displayName": "Pirates",
+    "colorHex": "FF4399",
+    "skinIds": [32, 209, 134, 201, 146, 136]
+  },
+  {
+    "displayName": "Yakuza",
+    "colorHex": "990000",
+    "skinIds": [49, 193, 60, 123, 263, 186, 210, 122]
+  }
+]
